@@ -75,6 +75,7 @@ $grid-breakpoint-has-push: ($medium-up, $large-up);
 // Jordans Changes:
 
 $color-blackish: rgba(0,0,0, 0.8);
+$color-white: #fff;
 $color-transparent: rgba(255,255,255, 0);
 
 // Backgrounds
@@ -177,6 +178,16 @@ $font-size-base: {{ settings.type_base_size }}; // Henseforth known as 1em
   font-style: normal;
 }
 
+@font-face {
+    font-family: 'trumpgothiceastbold';
+    src: url(' {{ "trumpgothiceastbold.woff2" | asset_url }} ') format('woff2'),
+    url(' {{ "trumpgothiceastbold.woff" | asset_url }} ') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+$font-gothic-bold: 'trumpgothiceastbold';
+
 $font-stack-icons: 'icons';
 $font-size-icons-social: 20px;
 $font-size-icons-payment: 20px;
@@ -202,8 +213,8 @@ $transition-site-header: top 0.15s cubic-bezier(0.2, 0.3, 0.25, 0.9);
 $padding-form: 12px;
 
 /*================ #Drawers ================*/
-$drawer-nav-width: 300px;
-$drawer-cart-width: 300px;
+$drawer-nav-width: 250px;
+$drawer-cart-width: 250px;
 $drawer-header-height: $height-site-header;
 $drawer-cart-footer-height: 130px; // default, overwritten by JS
 $drawer-transition: all 0.35s cubic-bezier(0.29, 0.63, 0.44, 1);
@@ -212,6 +223,7 @@ $color-drawers-border: adaptive-color($color-drawers, 5%);
 $color-drawer-inputs: {{ settings.color_body_bg }};
 $color-drawer-input-text: {{ settings.color_body_text }};
 $color-drawers-text: {{ settings.color_drawer_text }};
+$color-drawers-text-faded: rgba(0,0,0,0.3);
 
 /*================ Hero ================*/
 // $color-hero-overlay: {{ settings.hero_overlay_color }};
@@ -1169,6 +1181,34 @@ svg:not(:root) {
 }
 
 /*============================================================================
+  Body Options
+==============================================================================*/
+
+body {
+  position: relative;
+  left: 0;
+  right: 0;
+  transition: $drawer-transition;
+  &.js-drawer-open-left {
+    right: auto;
+    left: 250px;
+
+    @include media-query($medium-up) {
+      left: 300px;
+    }
+
+    @include media-query($large-up) {
+      left: 340px;
+    }
+  }
+
+   &.js-drawer-open-right {
+    right: 250px;
+    left: auto;
+  }
+}
+
+/*============================================================================
   #Forms
 ==============================================================================*/
 
@@ -1918,7 +1958,6 @@ th {
 .btn {
   position: relative;
   padding: 10px 30px;
-  border-radius: $radius;
   @include header-font-stack();
   font-size: $font-size-button; // 14px
 
@@ -2078,10 +2117,6 @@ html {
 @include media-query($large-up) {
   .payment-icons {
     margin-left: $gutter-site * 1.5;
-  }
-
-  .social-icons {
-    margin-right: $gutter-site * 1.5;
   }
 }
 
@@ -2332,6 +2367,7 @@ textarea {
     padding-bottom: 0;
     border: 0;
     border-radius: 0;
+    font-size: 12px;
     line-height: 45px;
   }
 }
@@ -2342,9 +2378,13 @@ textarea {
   
   &.input--password {
     height: 45px;
-    padding-top: 0;
+    padding-top: 3px;
     padding-bottom: 0;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 12px;
     line-height: 45px;
+    text-transform: uppercase;
   }
 
   @include media-query($small) {
@@ -2929,7 +2969,6 @@ $slick-opacity-not-active: 0.25;
 .site-header__inner {
   position: relative;
   height: $height-site-header;
-  padding: 0 ($gutter-site / 2);
   background-color: $color-navigation-bg;
   z-index: $z-index-site-header;
 }
@@ -2944,18 +2983,32 @@ $slick-opacity-not-active: 0.25;
   }
 }
 
-.site-header__toggle-nav {
+.site-header__toggle-nav, .site-header__cart {
   border: 0;
 
   .icon {
     font-size: em(25);
-    padding: $gutter-site / 2;
+    padding: $gutter-site * 0.75;
   }
 }
 
 .site-header__logo {
   //remove default margin when this is an <h1> tag
   margin: 0;
+  font-family: $font-gothic-bold;
+  font-size: 22px !important;
+  letter-spacing: 0;
+
+
+  @include media-query($medium-up) {
+    padding-top: 10px;
+    font-size: 30px !important;
+  }
+
+  @include media-query($large-up) {
+    padding-top: 30px;
+    font-size: 36px !important;
+  }
 
   img {
     max-height: $height-site-header;
@@ -2984,8 +3037,6 @@ $slick-opacity-not-active: 0.25;
   }
 }
 
-
-.site-header__cart .icon,
 .site-header__search .icon {
   font-size: em(25);
   padding: $gutter-site / 4;
@@ -3615,19 +3666,16 @@ $slick-opacity-not-active: 0.25;
 
 .social-icons--drawer {
   margin-top: $gutter-site * 1.5;
-
-  @include media-query($medium-down) {
-    margin-left: $gutter-site / 2;
-  }
 }
 
 .social-sharing a {
   display: inline-block;
   border: 1px solid $color-border;
-  color: $color-body-text;
-  padding: 10px 15px;
+  color: $color-white;
+  padding: 8px 13px;
   margin-left: ($gutter-site / 2);
   margin-bottom: ($gutter-site / 2);
+  letter-spacing: 0.2em;
 
   .icon {
     margin-right: 5px;
@@ -3664,6 +3712,8 @@ $slick-opacity-not-active: 0.25;
   overflow: hidden;
 }
 
+
+
 .drawer {
   display: none;
   position: fixed;
@@ -3671,6 +3721,7 @@ $slick-opacity-not-active: 0.25;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   bottom: 0;
+  text-align: center;
   z-index: $z-index-drawer;
   color: $color-drawers-text;
   background-color: $color-drawers;
@@ -3687,9 +3738,19 @@ $slick-opacity-not-active: 0.25;
   width: $drawer-nav-width;
   left: -$drawer-nav-width;
 
+  @include media-query($medium-up) {
+    width: 300px;
+    left: -300px;
+  }
+
+  @include media-query($large-up) {
+    width: 340px;
+    left: -340px;
+  }
+
   .js-drawer-open-left & {
     display: block;
-    @include transform(translateX($drawer-nav-width));
+    left: 0;
   }
 }
 
@@ -3717,6 +3778,7 @@ $slick-opacity-not-active: 0.25;
     display: block;
     @include transform(translateY(100%));
   }
+
 }
 
 #PageContainer {
@@ -3743,6 +3805,10 @@ $slick-opacity-not-active: 0.25;
   }
 }
 
+.sidebar-menu-section {
+  height: 100%;
+}
+
 .drawer__title,
 .drawer__close {
   display: table-cell;
@@ -3750,9 +3816,21 @@ $slick-opacity-not-active: 0.25;
 }
 
 .drawer__title {
-  @include header-font-stack();
-  font-size: em(floor($font-size-header * 0.71)); //17px
-  width: 100%;
+  display: block;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-bottom: 0;
+  color: $color-drawers-text-faded;
+  font-family: $font-gothic-bold;
+  font-size: 22px;
+  text-transform: uppercase;
+  letter-spacing: 0;
+
+  @include media-query($large-up) {
+    padding-top: 32px;
+    padding-bottom: 32px;
+    font-size: 25px;
+  }
 }
 
 .drawer__close-button {
@@ -3834,15 +3912,39 @@ $slick-opacity-not-active: 0.25;
   padding: 0 ($gutter-site / 2);
 }
 
+.drawer-nav__lower {
+  margin-top: auto;
+  padding-top: 10px;
+  padding-bottom: 25px;
+}
+
+.drawer-nav__lower-text {
+  margin: 0;
+  line-height: 16px;
+  span, a {
+    color: $color-drawers-text-faded;
+    font-size: 10px;
+    text-transform: uppercase;
+    @include media-query($large-up) {
+      font-size: 12px;
+    }
+  }
+
+  @include media-query($large-up) {
+    line-height: 18px;
+  }
+}
+
 .drawer__inner {
-  position: absolute;
-  top: $drawer-header-height;
-  bottom: 0;
-  left: 0;
-  right: 0;
   padding: 0 ($gutter-site / 2);
   overflow: auto;
   -webkit-overflow-scrolling: touch;
+
+  .drawer--left & {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
 
   @include media-query($large-up) {
     padding-left: $gutter-site;
@@ -4009,17 +4111,13 @@ $slick-opacity-not-active: 0.25;
   a {
     color: $color-drawers-text;
   }
-
-  @include media-query($small) {
-    margin-left: $gutter-site / 2;
-  }
 }
 
 // Login/logout links can't have a class on them so style all nav <a> elements
 .drawer-nav__item a,
 .drawer-nav__toggle button {
   color: $color-drawers-text;
-  padding: ($gutter-site / 1.5) ($gutter-site / 2);
+  padding: 12px ($gutter-site / 2);
   text-decoration: none;
 
   &:active {
@@ -4028,10 +4126,29 @@ $slick-opacity-not-active: 0.25;
   }
 }
 
-.drawer-nav__item a {
-  display: block;
-  padding-left: $gutter-site;
-  font-size: em(floor($font-size-header * 0.83)); // 20px
+.drawer-nav__item {
+  a {
+    display: block;
+  }
+
+}
+
+.drawer-nav__item--upper {
+  & > a, .drawer-nav__link--upper {
+    position: relative;
+    font-family: $font-gothic-bold;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    font-size: 20px;
+    @include media-query($medium-up) {
+      font-size: 21px;
+    }
+
+    @include media-query($large-up) {
+      font-size: 23px;
+    }
+
+  }
 }
 
 .drawer-nav__link {
@@ -4059,20 +4176,13 @@ $slick-opacity-not-active: 0.25;
 }
 
 .drawer-nav__has-sublist {
-  display: table;
+  display: block;
   width: 100%;
-
-  .drawer-nav__link {
-    display: table-cell;
-    vertical-align: middle;
-    width: 100%;
-  }
 }
 
 .drawer-nav__toggle {
-  display: table-cell;
-  vertical-align: middle;
-  width: 1%;
+  display: none;
+  position: absolute;
 }
 
 .drawer-nav__toggle-open {
@@ -4110,9 +4220,21 @@ $slick-opacity-not-active: 0.25;
 
   .drawer-nav__link {
     color: $color-drawers-text;
-    font-size: $font-size-base;
-    padding: ($gutter-site / 2.5) ($gutter-site / 2) ($gutter-site / 2.5) ($gutter-site * 2);
+    font-size: 12px;
+    text-transform: uppercase;
+    padding: 6px ($gutter-site / 2) 6px ($gutter-site / 2);
     font-weight: $font-weight-normal;
+    @include media-query($medium-up) {
+      font-size: 13px;
+      padding-top: 7px;
+      padding-bottom: 7px;
+    }
+
+    @include media-query($large-up) {
+      font-size: 15px;
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
   }
 }
 
@@ -4651,50 +4773,103 @@ $slick-opacity-not-active: 0.25;
 /*============= Templates | Password page =============*/
 
 .template-password {
-  height: 100vh;
+  @include media-query($medium-up) {
+    height: 100vh;
+  }
+
+  @include media-query($large-up) {
+    overflow: hidden;
+  }
+}
+
+textarea,
+input[type="text"],
+input[type="button"],
+input[type="submit"] {
+     -webkit-appearance: none;
+     border-radius: 0;
 }
 
 .password-page {
-  display: table;
   height: 100%;
   width: 100%;
   color: $color-body-text;
   background-color: $color-body;
+  display: flex;
+  flex-direction: column;
 }
 
 .password-page-section {
-  display: table-row;
+  display: block;
   width: 100%;
 }
 
 .password-header {
   background: $color-navigation-bg;
+  padding-top: 22px;
+  padding-bottom: 22px;
+  @include media-query($large-up) {
+    padding-top: 25px;
+    padding-bottom: 25px;
+  }
 }
 
 .password-logo {
+  display: inline-block;
   h2 {
+    font-family: $font-gothic-bold;
     margin-bottom: 0;
+    font-size: 26px;
+    @include media-query($large-up) {
+      font-size: 30px;
+    }
   }
 
   .logo {
-    color: $color-navigation-text;
     width: $width-logo;
     max-width: 100%;
+    margin-right: -4px;
+    color: $color-navigation-text;
     font-weight: 700; 
+    letter-spacing: 0;
   }
 }
 
 .password-content-section {
-  display: table-row;
+  position: relative;
+  display: block;
   width: 100%;
   height: 100%;
   margin: 0 auto;
+  @include media-query($medium-up) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .password-main {
-  display: table-cell;
+  position: relative;
   vertical-align: middle;
   padding: ($gutter-site / 2) $gutter-site;
+}
+
+.password-imgwrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.password-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: 90% 50%;
+  @include media-query($medium-up) {
+    object-position: top;
+  }
 }
 
 .password-main__inner {
@@ -4702,7 +4877,10 @@ $slick-opacity-not-active: 0.25;
 }
 
 .password-hero {
-  margin-top: $gutter-site * 4;
+  margin-top: 70px;
+  @include media-query($large-up) {
+    margin-top: 100px;
+  }
 }
 
 .password-login-form,
@@ -4724,12 +4902,25 @@ $slick-opacity-not-active: 0.25;
 
 .password-signup-form__heading,
 .password-social-sharing__heading {
-  margin-top: $gutter-site * 2;
-  margin-bottom: $gutter-site;
+  // margin-top: $gutter-site * 2;
+  // margin-bottom: $gutter-site;
+}
+
+.password-signup-form__heading {
+  margin-top: 40px;
+  margin-bottom: 50px;
+}
+
+.password-social-sharing__heading {
+  padding-bottom: 18px;
 }
 
 .password-social-sharing {
-  margin-top: $gutter-site;
+  margin-top: 45px;
+  text-transform: uppercase;
+  .social-sharing {
+    font-size: 10px;
+  }
 }
 
 .password-login,
@@ -4740,6 +4931,8 @@ $slick-opacity-not-active: 0.25;
 .password-login {
   @include header-font-stack();
   margin: ($gutter-site * 3) 0;
+  margin-top: 30px;
+  margin-bottom: 100px;
 }
 
 .password-footer {

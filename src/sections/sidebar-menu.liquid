@@ -1,12 +1,5 @@
-<div class="drawer__header" data-section-id="{{ section.id }}" data-section-type="sidebar-menu-section">
-  <div class="drawer__close">
-    <button type="button" class="drawer__close-button js-drawer-close">
-      <span class="icon icon-x" aria-hidden="true"></span>
-      <span class="icon__fallback-text">{{ 'layout.drawers.close_menu' | t }}</span>
-    </button>
-  </div>
-</div>
 <div class="drawer__inner">
+  <h2 class="drawer__title">{{ shop.name }}</h2>
   <ul class="drawer-nav">
     {% for link in linklists[section.settings.sidebar_top_link_list].links %}
       {% assign child_list_handle = link.title | handleize %}
@@ -18,9 +11,9 @@
             {% assign has_active_child_link = true %}
           {% endif %}
         {% endfor %}
-        <li class="drawer-nav__item{% unless template.name == 'index' %}{% if link.active %} drawer-nav__item--active{% endif %}{% endunless %}" aria-haspopup="true">
+        <li class="drawer-nav__item drawer-nav__item--upper{% unless template.name == 'index' %}{% if link.active %} drawer-nav__item--active{% endif %}{% endunless %}" aria-haspopup="true">
           <div class="drawer-nav__has-sublist{% if has_active_child_link %} drawer-nav--expanded{% endif %}">
-            <a href="{{ link.url }}" class="drawer-nav__link h2">{{ link.title }}</a>
+            <a href="{{ link.url }}" class="drawer-nav__link drawer-nav__link--upper h2">{{ link.title }}</a>
             <div class="drawer-nav__toggle">
               <button type="button" class="drawer-nav__toggle-button">
                 <span class="drawer-nav__toggle-open">
@@ -43,27 +36,25 @@
           </ul>
         </li>
       {% else %}
-        <li class="drawer-nav__item{% unless template.name == 'index' %}{% if link.active %} drawer-nav__item--active{% endif %}{% endunless %}">
+        <li class="drawer-nav__item drawer-nav__item--upper{% unless template.name == 'index' %}{% if link.active %} drawer-nav__item--active{% endif %}{% endunless %}">
           <a href="{{ link.url }}" class="drawer-nav__link h2">{{ link.title }}</a>
         </li>
       {% endif %}
     {% endfor %}
 
-    <li class="drawer-nav__spacer"></li>
-
     {% if shop.customer_accounts_enabled %}
       {% if customer %}
-        <li class="drawer-nav__item drawer-nav__item--secondary">
+        <li class="drawer-nav__item drawer-nav__item--upper">
           <a href="/account">{{ 'layout.customer.account' | t }}</a>
         </li>
-        <li class="drawer-nav__item drawer-nav__item--secondary">
+        <li class="drawer-nav__item drawer-nav__item--upper">
           {{ 'layout.customer.log_out' | t | customer_logout_link }}
         </li>
       {% else %}
-        <li class="drawer-nav__item drawer-nav__item--secondary">
+        <li class="drawer-nav__item drawer-nav__item--upper">
           {{ 'layout.customer.log_in' | t | customer_login_link }}
         </li>
-        <li class="drawer-nav__item drawer-nav__item--secondary">
+        <li class="drawer-nav__item drawer-nav__item--upper">
           {{ 'layout.customer.create_account' | t | customer_register_link }}
         </li>
       {% endif %}
@@ -155,6 +146,13 @@
       </li>
     {% endif %}
   </ul>
+
+  <div class="drawer-nav__lower">
+    {% for link in linklists.nav-bottom.links %}
+      <p class="drawer-nav__lower-text">{{ link.title | link_to: link.url }}</p>
+    {% endfor %}
+    <p class="drawer-nav__lower-text"><span>&copy {{ shop.name }}</span></p>
+  </div>
 </div>
 
 {% schema %}

@@ -2172,12 +2172,12 @@ theme.cookiesEnabled = function() {
 theme.drawersInit = function () {
   // Add required classes to HTML
   $('#PageContainer').addClass('drawer-page-content');
-  $('.js-drawer-open-left').attr('aria-controls', 'CartDrawer').attr('aria-expanded', 'false');
-  $('.js-drawer-open-right').attr('aria-controls', 'NavDrawer').attr('aria-expanded', 'false');
+  $('.js-drawer-open-right').attr('aria-controls', 'CartDrawer').attr('aria-expanded', 'false');
+  $('.js-drawer-open-left').attr('aria-controls', 'NavDrawer').attr('aria-expanded', 'false');
   $('.js-drawer-open-top').attr('aria-controls', 'SearchDrawer').attr('aria-expanded', 'false');
 
-  theme.LeftDrawer = new theme.Drawers('CartDrawer', 'left');
-  theme.RightDrawer = new theme.Drawers('NavDrawer', 'right', {
+  theme.LeftDrawer = new theme.Drawers('NavDrawer', 'left');
+  theme.RightDrawer = new theme.Drawers('CartDrawer', 'right', {
     {% if settings.cart_type == 'drawer' %}'onDrawerOpen': ajaxCart.load{% endif %}
   });
   theme.SearchDrawer = new theme.Drawers('SearchDrawer', 'top', {'onDrawerOpen': theme.searchFocus});
