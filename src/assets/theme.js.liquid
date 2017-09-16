@@ -2367,5 +2367,24 @@ $(document).ready(function() {
   sections.register('collection-template-section', theme.CollectionTemplate);
   sections.register('product', theme.Product);
   sections.register('rich-text-section', theme.RichTextSection);
-  sections.register('featured-video-section', theme.FeaturedVideoSection);
+  sections.register('featured-video-section', theme.FeaturedVideoSection);  
+
+  function showCross() {
+    if (burger.hasClass('active')) {
+      burger.removeClass('active');
+      drawerBg.removeClass('drawer-page-content--active');
+    } else {
+      burger.addClass('active');
+      drawerBg.addClass('drawer-page-content--active');
+    }
+  }
+  
+  var burger = $('.js-drawer-open-left');
+  var drawerBg = $('body');
+
+  $(document).on('click', 'body.drawer-page-content--active', function() {
+    console.log('lol');
+  });
+  burger.on('click', showCross);
+  
 });

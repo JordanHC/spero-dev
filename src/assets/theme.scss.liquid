@@ -3737,7 +3737,7 @@ $slick-opacity-not-active: 0.25;
 .drawer--left {
   width: $drawer-nav-width;
   left: -$drawer-nav-width;
-
+  
   @include media-query($medium-up) {
     width: 300px;
     left: -300px;
@@ -3931,7 +3931,7 @@ $slick-opacity-not-active: 0.25;
   }
 
   @include media-query($large-up) {
-    line-height: 18px;
+    line-height: 20px;
   }
 }
 
@@ -3957,6 +3957,48 @@ $slick-opacity-not-active: 0.25;
 
   .drawer--product & {
     top: 0;
+  }
+}
+
+
+/*================ Burger ================*/
+
+.burger {
+  position: relative;
+  z-index: 999;
+  display: block;
+  padding: 20px 15px 15px;
+  transition: $drawer-transition;
+  .active & {
+    transform: rotate(225deg);
+  }
+}
+
+.burger__line {
+  width: 22px;
+  height: 2px;
+  display: block;
+  background: $color-white;
+  transition: $drawer-transition;
+}
+
+.burger__line--top {
+  .active & {
+    transform: rotate(90deg) translateX(7px);
+  }
+}
+    
+.burger__line--bottom {
+  .active & {
+    transform: translateY(-7px);
+  }
+}
+
+.burger__line--middle {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  .active & {
+    opacity: 0;
   }
 }
 
