@@ -1,4 +1,4 @@
-<div class="product-item grid__item {{ grid_item_width }}">
+<div class="product-item grid__item one-half {{ grid_item_width }}">
   <div class="product-item__link-wrapper">
     <a class="product-item__link {% if product_image_spacing %} product-item__image--margins{% endif %}" href="{{ product.url | within: collection }}">
 
@@ -37,7 +37,7 @@
               {% endcomment %}
               {% if product.compare_at_price > product.price %}
                 <span class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
-                <s class="product-item__price--reg">{{ product.compare_at_price | money_without_trailing_zeros }}</s>
+                <s class="product-item__price--reg">{{ product.compare_at_price | money }}</s>
                 <span class="product-item__price--sale">{{ 'products.general.now_price_html' | t: price: price }}</span>
               {% else %}
                 {% if product.price_varies %}
@@ -48,7 +48,7 @@
                   {% else %}
                     <span class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
                   {% endif %}
-                  {{ product.price | money_without_trailing_zeros }}
+                  {{ product.price | money }}
                 {% endif %}
               {% endif %}
             </p>

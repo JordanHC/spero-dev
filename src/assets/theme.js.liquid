@@ -1454,7 +1454,7 @@ var ajaxCart = (function(module, $) {
        *   - A hard-coded url of no-image
       */
       if (cartItem.image != null){
-        var prodImg = cartItem.image.replace(/(\.[^.]*)$/, "_small$1").replace('http:', '');
+        var prodImg = cartItem.image.replace(/(\.[^.]*)$/, "_medium$1").replace('http:', '');
       } else {
         var prodImg = "//cdn.shopify.com/s/assets/admin/no-image-medium-cc9732cb976dd349a0df1d39816fbcc7.gif";
       }
@@ -1473,6 +1473,7 @@ var ajaxCart = (function(module, $) {
         line: index + 1, // Shopify uses a 1+ index in the API
         url: cartItem.url,
         img: prodImg,
+        id: cartItem.id,
         name: cartItem.product_title,
         variation: cartItem.variant_title,
         properties: cartItem.properties,
@@ -2381,10 +2382,59 @@ $(document).ready(function() {
   
   var burger = $('.js-drawer-open-left');
   var drawerBg = $('body');
+  var cartQty = $('.cart-qty span');
 
-  $(document).on('click', 'body.drawer-page-content--active', function() {
-    console.log('lol');
+  function updateTheCart(deleteThis) { 
+    deleteThis.slideUp( function () {
+      $(this).remove();
+    });
+     
+    // Change the basket no
+    var basketNo = $('.cart-qty span').text();
+    basketNo = basketNo - 1;
+    cartQty.text(basketNo);
+    
+    // Check how many is in basket now, if none get rid of stuff.
+
+    var theProductsLength = $('.ajaxcart__product').length - 1;
+    
+    if (theProductsLength === 0) {
+      var cartContainer = $('#CartContainer');
+      cartContainer.html('<p class="cart--empty-message">Your cart is currently empty.</p>');
+    }
+    
+  }
+
+  $('#CartContainer').on('click', '.ajax-cart-remove', function() {
+
+    var productId = parseInt($(this).attr('data-id'));
+    var productToDel = $(this).parents('.ajaxcart__product');
+    $.post('/cart/update.js', 'updates[' + productId + ']=0')
+      .done(function() {
+        updateTheCart(productToDel);
+      })
+      .fail(function() {
+        updateTheCart(productToDel);
+      })
   });
-  burger.on('click', showCross);
-  
+
+  $('.drawer-nav__has-sublist').click(function(e) {
+    e.preventDefault;
+    $(this).toggleClass('drawer-nav--expanded');
+    return false;
+  });
+
+  var productLabel = $('.product__label');
+
+  productLabel.click(function() {
+    productLabel.removeClass('product__label--active');
+    var productVarient = $(this).attr('data-id');
+    var productText = $(this).text();
+    //$('.single-option-selector option').removeAttr('selected');
+    //$('.go-away option').removeAttr('selected');
+    $('.single-option-selector').val(productText).change();
+    //$('.go-away option[value=' + productVarient + ']').attr('selected','selected');
+    $(this).addClass('product__label--active');
+  });
+
 });

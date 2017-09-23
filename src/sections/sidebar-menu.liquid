@@ -11,8 +11,8 @@
             {% assign has_active_child_link = true %}
           {% endif %}
         {% endfor %}
-        <li class="drawer-nav__item drawer-nav__item--upper{% unless template.name == 'index' %}{% if link.active %} drawer-nav__item--active{% endif %}{% endunless %}" aria-haspopup="true">
-          <div class="drawer-nav__has-sublist{% if has_active_child_link %} drawer-nav--expanded{% endif %}">
+        <li class="drawer-nav__item drawer-nav__item--upper drawer-nav__item--hc{% unless template.name == 'index' %}{% if link.active %} drawer-nav__item--active{% endif %}{% endunless %}" aria-haspopup="true">
+          <div class="drawer-nav__has-sublist">
             <a href="{{ link.url }}" class="drawer-nav__link drawer-nav__link--upper h2">{{ link.title }}</a>
             <div class="drawer-nav__toggle">
               <button type="button" class="drawer-nav__toggle-button">
