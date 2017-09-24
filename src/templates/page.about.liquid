@@ -1,0 +1,18 @@
+<!-- /templates/page.liquid -->
+
+<section class="grid grid--uniform grid--no-gutters">
+		{% section 'half-image' %}
+		<div class="product__details grid__item medium-up--one-half">
+			<div class="product__details-content">
+				<a href="#" onClick="history.go(-1); return false;" class="back-link">
+            <span>{{ 'products.product.back' | t }}</span>
+        </a>
+				<header>
+						<h1 class="rte__title">{{ page.title }}</h1>
+				</header>
+				<div class="rte rte--indented-images">
+						{{ page.content }}
+				</div>
+			</div>
+		</div>
+</section>

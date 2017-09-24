@@ -37,9 +37,9 @@
     {% else %}
       {% assign grid_item_width = '' %}
     {% endif %}
-
+    <div class="grid__item {{ grid_item_width }} medium-up--one-half"/>
     {% if product.images.size > 0 %}
-      <div class="product__photo grid__item {{ grid_item_width }} medium-up--one-half">
+      <div class="product__photo">
         {% for image in product.images %}
           {% assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
           <div data-image-id="{{ image.id }}" class="product__photo--single product__photo--variant-wrapper" style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;">
@@ -50,12 +50,30 @@
               data-aspectratio="{{ image.aspect_ratio }}"
               data-sizes="auto"
               alt="{{ image.alt | escape }}">
+            {% if product.metafields.product.model-description %}
+              <span class="product__modeldesc">{{ product.metafields.product.model-description }}</span>
+            {% endif %}
           </div>
         {% endfor %}
 
         <noscript>
           <img class="product__photo--variant" src="{{ first_image | img_url: '2048x2048' }}" alt="{{ image.alt | escape }}">
         </noscript>
+      </div>
+
+      <div class="product-slider-nav">
+        {% for image in product.images %}
+        {% assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+        <div class="product__photo--single" style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;">
+          <img class="lazyload"
+            src="{{ image | img_url: '300x' }}"
+            data-src="{{ img_url }}"
+            data-widths="[360]"
+            data-aspectratio="{{ image.aspect_ratio }}"
+            data-sizes="auto"
+            alt="{{ image.alt | escape }}">
+          </div>
+          {% endfor %}
       </div>
 
       {% comment %}
@@ -95,9 +113,32 @@
             {% endunless %}
           {% endunless %}
         {% endfor %}
+        {% for image in product.images %}
+          {% unless image == first_image %}
+            {% unless section.settings.skip_first_product_image and image == product.featured_image %}
+              <div class="product-slider-nav">
+                <div class="product__photo--single" style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;">
+                  <img class="lazyload"
+                    src="{{ image | img_url: '300x' }}"
+                    data-src="{{ img_url }}"
+                    data-widths="[360, 540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
+                    data-aspectratio="{{ image.aspect_ratio }}"
+                    data-sizes="auto"
+                    alt="{{ image.alt | escape }}">
+                </div>
+              </div>
+              {% assign index = index | plus: 1 %}
+              {% assign index_offset = forloop.index %}
+              {% assign duplicate_image = image %}
+              {% break %}
+            {% endunless %}
+          {% endunless %}
+        {% endfor %}
       {% endif %}
 
     {% endif %}
+    </div>
+   
 
     <div class="product__details grid__item medium-up--one-half">
       <div class="grid grid--no-gutters product__details-content">
