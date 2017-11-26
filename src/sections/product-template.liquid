@@ -138,7 +138,7 @@
 
     {% endif %}
     </div>
-   
+
 
     <div class="product__details grid__item medium-up--one-half">
       <div class="grid grid--no-gutters product__details-content">
@@ -146,8 +146,10 @@
           <a href="{% if collection %}{{ collection.url }}{% else %}/{% endif %}" class="back-link">
             <span>{{ 'products.product.back' | t }}</span>
           </a>
+
           {% if section.settings.show_vendor %}
-            <p class="product-item__vendor">{{ product.vendor }} {{ product.type }}</p>
+            <p class="product-item__vendor">PRE-ORDER</p>
+            {% comment %} <p class="product-item__vendor">{{ product.vendor }} {{ product.type }}</p> {% endcomment %}
           {% endif %}
           <h2 class="product-item__title product-item__title--actual" itemprop="name">{{ product.title }}</h2>
           {% assign price = current_variant.price | money %}
@@ -231,7 +233,7 @@
     {% comment %}
       Show other product images below product info if there's any left to show
     {% endcomment %}
- 
+
   </div>
 </div>
 

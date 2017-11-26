@@ -48,11 +48,13 @@
     - Do not change the variable names
 ==============================================================================*/
 $grid-medium: 750px;
+$grid-small: 500px;
 $grid-large: 990px;
 $grid-widescreen: 1400px;
 $grid-gutter: 30px;
 
 $small: 'small';
+$small-up: 'small-up';
 $medium: 'medium';
 $medium-down: 'medium-down';
 $medium-up: 'medium-up';
@@ -66,8 +68,8 @@ $widescreen: 'widescreen';
     - Default column widths: $grid-breakpoint-has-widths: ($small, $medium-up);
     - Default is no push classes
 ==============================================================================*/
-$grid-breakpoint-has-widths: ($small, $medium, $medium-up, $large-up, $widescreen);
-$grid-breakpoint-has-push: ($medium-up, $large-up);
+$grid-breakpoint-has-widths: ($small, $small-up, $medium, $medium-up, $large-up, $widescreen);
+$grid-breakpoint-has-push: ($small-up, $medium-up, $large-up);
 
 
 /*================ #Color Variables ================*/
@@ -77,6 +79,7 @@ $grid-breakpoint-has-push: ($medium-up, $large-up);
 $color-blackish: rgba(0,0,0, 0.8);
 $color-fadedblack: rgba(0,0,0, 0.2);
 $color-whereistheblack: rgba(0,0,0, 0.1);
+$color-black-5: rgba(0,0,0,0.5);
 $color-black: #000;
 $color-white: #fff;
 $color-greyish: #b5b5b5;
@@ -191,6 +194,7 @@ $font-size-base: {{ settings.type_base_size }}; // Henseforth known as 1em
 }
 
 $font-gothic-bold: 'trumpgothiceastbold';
+$font-montserrat: 'Montserrat';
 
 $font-stack-icons: 'icons';
 $font-size-icons-social: 20px;
@@ -617,6 +621,7 @@ textarea {
 // You can use these in the media-query mixin.
 $grid-breakpoints: (
   $small '(max-width: #{$grid-medium - 1})',
+  $small-up '(min-width: #{$grid-small})',
   $medium '(min-width: #{$grid-medium}) and (max-width: #{$grid-large - 1})',
   $medium-down '(max-width: #{$grid-large - 1})',
   $medium-up '(min-width: #{$grid-medium})',
@@ -933,7 +938,28 @@ pre {
 .icon-arrow-left:before { content: "\e608"; }
 .icon-arrow-right:before { content: "\e609"; }
 .icon-bitcoin:before { content: "\42"; }
-.icon-cart:before { content: "\e600"; }
+.icon-cart:before {
+  /* content: "\e600";  */
+  content: '';
+  height: 22px;
+  width: 16px;
+  display: inline-block;
+  margin-right: 2px;
+  background-image: url('{{ "shopping-bag.svg" | asset_url }}');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  transform: translateY(1px);
+  @include media-query($medium-up) {
+    height: 24px;
+    width: 18px;
+    margin-right: 5px;
+  }
+
+  @include media-query($large-up) {
+    height: 26px;
+    width: 20px;
+  }
+}
 .icon-cirrus:before { content: "\43"; }
 .icon-dankort:before { content: "\64"; }
 .icon-diners_club:before { content: "\63"; }
@@ -2350,6 +2376,184 @@ textarea {
   }
 }
 
+.mailchimp-signup {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  opacity: 0;
+  background: $color-black-5;
+  transition: opacity ease 0.6s;
+  &.active {
+    left: 0;
+    opacity: 1;
+  }
+}
+
+.mailchimp-signup__form {
+  position: relative;
+  width: 90%;
+  max-width: 480px;
+  display: inline-block;
+  padding: 32px 30px;
+  text-align: center;
+  opacity: 0;
+  background: $color-white;
+  transition: all ease-in-out 0.3s;
+  @include media-query($large-up) {
+    max-width: 580px;
+    padding: 52px 45px;
+  }
+
+  @include media-query($widescreen) {
+    max-width: 700px;
+    padding: 90px 80px 122px;
+  }
+
+  .mailchimp-signup.active & {
+    transition-delay: 0.5s;
+    opacity: 1;
+  }
+}
+
+.mailchimp-signup__title {
+  display: block;
+  font-family: $font-gothic-bold;
+  font-size: 40px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  @include media-query($medium-up) {
+    font-size: 50px;
+  }
+
+  @include media-query($large-up) {
+    margin-bottom: 0;
+    font-size: 80px;
+  }
+
+  @include media-query($widescreen) {
+    font-size: 104px;
+  }
+}
+
+.mailchimp-signup__text {
+  margin-bottom: 25px;
+  font-family: $font-montserrat;
+  font-size: 13px;
+  text-transform: uppercase;
+  @include media-query($medium-up) {
+    margin-bottom: 28px;
+  }
+
+  @include media-query($large-up) {
+    margin-bottom: 32px;
+    font-size: 14px;
+  }
+
+  @include media-query($widescreen) {
+    margin-bottom: 45px;
+    font-size: 15px;
+  }
+}
+
+.mailchimp-signup__base {
+  width: 90%;
+  display: inline-block;
+  padding: 0 18px;
+  text-align: center;
+  font-size: 13px;
+  line-height: 40px;
+  text-transform: uppercase;
+  @include media-query($medium-up) {
+    line-height: 44px;
+  }
+
+  @include media-query($large-up) {
+    font-size: 14px;
+    line-height: 50px;
+  }
+
+  @include media-query($widescreen) {
+    font-size: 15px;
+  }
+}
+
+input[type=email]::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: $color-black;
+}
+input[type=email]::-moz-placeholder { /* Firefox 19+ */
+  color: $color-black;
+  opacity: 1;
+}
+input[type=email]:-ms-input-placeholder { /* IE 10+ */
+  color: $color-black;
+}
+input[type=email]:-moz-placeholder { /* Firefox 18- */
+  color: $color-black;
+  opacity: 1;
+}
+
+.mailchimp-signup__input {
+  margin-bottom: 14px;
+  background: $color-white;
+  border: 1px solid $color-black;
+  @include media-query($widescreen) {
+    line-height: 64px;
+    margin-bottom: 20px;
+  }
+}
+
+.mailchimp-signup__btn {
+  color: $color-white;
+  background: $color-black;
+  @include media-query($widescreen) {
+    line-height: 56px;
+  }
+}
+
+.mailchimp-signup__cross {
+  position: absolute;
+  top: 22px;
+  right: 15px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.mailchimp-signup__part {
+  display: block;
+  background: $color-black;
+  width: 18px;
+  height: 2px;
+  @include media-query($widescreen) {
+    width: 22px;
+  }
+}
+
+.mailchimp-signup__left {
+  transform: rotate(45deg) translateY(7px);
+}
+
+.mailchimp-signup__middle {
+  opacity: 0;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+.mailchimp-signup__right {
+  transform: rotate(-45deg) translateY(-7px);
+}
+
+.step__footer__previous-link-content {
+  display: none;
+}
+
+
 
 /*================ Inline Forms ================*/
 
@@ -2391,7 +2595,7 @@ textarea {
 .input-group__field {
   padding: 10px;
   width: 270px;
-  
+
   &.input--password {
     height: 45px;
     padding-top: 3px;
@@ -2481,7 +2685,7 @@ textarea {
     width: 100%;
     height: 140px;
     z-index: 4;
-    
+
     @include media-query($medium-up) {
       height: 200px;
     }
@@ -2957,6 +3161,19 @@ $slick-opacity-not-active: 0.25;
   }
 }
 
+.product__photo {
+  .slick-slide {
+    cursor: move;
+    cursor: -webkit-grab;
+  }
+}
+
+.product-slider-nav {
+  .slick-slide {
+    cursor: pointer;
+  }
+}
+
 .announcement-bar {
   display: block;
   text-align: center;
@@ -3290,7 +3507,7 @@ $slick-opacity-not-active: 0.25;
   color: $color-drawers-text;
   background-color: $color-drawers;
   border-bottom: 1px solid rgba(0,0,0,0.1);
-  height: $height-site-header;  
+  height: $height-site-header;
   padding: 0 ($gutter-site / 2);
 }
 
@@ -3343,11 +3560,11 @@ $slick-opacity-not-active: 0.25;
   line-height: $height-action-bar;
 }
 
-@include media-query($medium-down) {
+/* @include media-query($medium-down) {
   .product-item {
     margin-bottom: $gutter-site * 1.25;
   }
-}
+} */
 
 .product-item__link-wrapper {
   @include display-flexbox();
@@ -3380,7 +3597,7 @@ $slick-opacity-not-active: 0.25;
   }
 
   p {
-    margin: 0 15px 2px 15px;
+    margin: 0 8px 0px 8px;
 
     &:last-child {
       margin-bottom: 0;
@@ -3413,7 +3630,11 @@ $slick-opacity-not-active: 0.25;
   transition: opacity 0.2s ease;
 
   @include media-query($large-up) {
-    margin-bottom: 0;    
+    margin-bottom: 0;
+  }
+
+  &.product-item__image--dark {
+    opacity: 0.25;
   }
 }
 
@@ -3432,12 +3653,16 @@ $slick-opacity-not-active: 0.25;
 
 .product-item__title {
   @include header-font-stack();
-  color: $color-headings-text;  
+  color: $color-headings-text;
   font-family: $font-gothic-bold;
-  font-size: 16px;
+  font-size: 13px;
   letter-spacing: 0;
+  @include media-query($small-up) {
+    font-size: 16px;
+
+  }
   @include media-query($medium-up) {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   @include media-query($large-up) {
@@ -3534,52 +3759,66 @@ $slick-opacity-not-active: 0.25;
   }
 }
 
-@include media-query($large-up) {
-  .product-item__meta {
-    display: block;
-    width: 100%;
-    position: absolute;
-    left: 0;
-    bottom: 0;
+.product-item__meta {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: block;
+  background: $color-blackish;
+  @include media-query($large-up) {
     transform: translateY(100%);
-    background: $color-black;
     transition: all 0.4s ease-in-out;
-    
-    .product-item__link:hover & {
+
+    .product-item__link:hover &, &.product-item__meta--active {
       bottom: 0;
       transform: translateY(0%);
     }
   }
+}
 
-  .product-item__meta__inner {
-    padding: 18px $gutter-site/2;
+
+.product-item__meta__inner {
+  padding-top: 12px;
+  padding-bottom: 12px;
+
+  @include media-query($small-up) {
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+
+  @include media-query($large-up) {
+    padding-left: $gutter-site/2;
+    padding-right: $gutter-site/2;
     opacity: 0;
     transition: all 0.5s ease;
-    
-    .product-item__link:hover & {
+
+    .product-item__link:hover &, &.product-item__meta__inner--active {
       transition-delay: 0.15s;
       opacity: 1;
     }
   }
-}
 
-@include media-query($widescreen) {
-  .product-item__meta__inner {
+  @include media-query($widescreen) {
     padding-top: 28px;
     padding-bottom: 28px;
   }
 }
 
+
 .product-item__price-wrapper {
-  font-size: $font-size-base - 3px;
+  font-size: $font-size-base - 5px;
   color: $color-white;
+  @include media-query($small-up) {
+    font-size: $font-size-base - 3px;
+  }
 
   @include media-query($medium-up) {
     font-size: $font-size-base - 1px;
   }
-  
+
   @include media-query($large-up) {
-    font-size: $font-size-base;
+    font-size: $font-size-base + 1px;
   }
 }
 
@@ -3655,7 +3894,13 @@ $slick-opacity-not-active: 0.25;
   }
 }
 
+.modalContent {
+  background: red;
+}
+
 .rte {
+  font-family: $font-montserrat;
+  font-weight: 300;
   font-size: 13px;
   line-height: 24px;
   @include media-query($large-up) {
@@ -3877,7 +4122,7 @@ $slick-opacity-not-active: 0.25;
 .drawer--left {
   width: $drawer-nav-width;
   left: -$drawer-nav-width;
-  
+
   @include media-query($medium-up) {
     width: 300px;
     left: -300px;
@@ -4158,7 +4403,7 @@ $slick-opacity-not-active: 0.25;
   position: relative;
   z-index: 999;
   display: block;
-  padding: 20px 15px 15px;
+  padding: 19px 15px 15px;
   transition: $drawer-transition;
   .active & {
     transform: rotate(225deg);
@@ -4187,7 +4432,7 @@ $slick-opacity-not-active: 0.25;
     transform: rotate(90deg) translateX(7px);
   }
 }
-    
+
 .burger__line--bottom {
   .active & {
     transform: translateY(-7px);
@@ -4217,7 +4462,7 @@ $slick-opacity-not-active: 0.25;
 }
 
 .cart-qty {
-  font-family: 'Montserrat';
+  font-family: $font-montserrat;
   font-weight: 300;
   font-size: 13px;
   line-height: 40px;
@@ -4413,7 +4658,7 @@ $slick-opacity-not-active: 0.25;
   margin: 0;
   text-align: center;
   font-size: 10px;
-  font-family: 'Montserrat';
+  font-family: $font-montserrat;
   font-weight: 300;
   text-transform: uppercase;
   &:after {
@@ -4748,6 +4993,8 @@ $slick-opacity-not-active: 0.25;
 }
 
 .product-single__description {
+  font-family: $font-montserrat;
+  font-weight: 300;
   font-size: 14px;
 
   @include media-query($large-up) {
@@ -4759,7 +5006,7 @@ $slick-opacity-not-active: 0.25;
   position: absolute;
   bottom: 2px;
   left: 5px;
-  z-index: 10;  
+  z-index: 10;
   color: $color-drawers-text-lessfaded;
   font-size: 10px;
   text-transform: uppercase;
@@ -5364,7 +5611,7 @@ input[type="submit"] {
 }
 
 .password-logo {
-  display: inline-block;
+  display: block;
   h2 {
     font-family: $font-gothic-bold;
     margin-bottom: 0;
@@ -5379,7 +5626,7 @@ input[type="submit"] {
     max-width: 100%;
     margin-right: -4px;
     color: $color-navigation-text;
-    font-weight: 700; 
+    font-weight: 700;
     letter-spacing: 0;
   }
 }
