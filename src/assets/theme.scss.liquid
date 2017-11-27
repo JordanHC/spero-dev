@@ -1967,6 +1967,7 @@ p {
 
 .txt--minor {
   font-size: 80%; // match <small>
+  text-transform: uppercase;
 }
 
 .txt--emphasis {
@@ -4999,6 +5000,7 @@ $slick-opacity-not-active: 0.25;
 
   @include media-query($large-up) {
     font-size: 15px;
+    max-width: 424px;
   }
 }
 
@@ -6297,4 +6299,30 @@ $z-index-giftcard-code: 5;
   }
 }
 
+.drawer-disabled {
+  color: $color-drawers-text-faded !important;
+  pointer-events: none;
+}
 
+.password__btn {
+  border-color: $color-white;
+}
+
+.password__white {
+  color: $color-white;
+}
+
+.password--active {
+  background: $color-black;
+}
+
+a.cart__text {
+   color: $color-black;
+   font-weight: 700;
+   letter-spacing: 0;
+}
+
+.cart__subtotal-title {
+  font-weight: 700;
+  color: $color-black;
+}
