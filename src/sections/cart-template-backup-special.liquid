@@ -25,10 +25,7 @@
               </td>
               <td class="cart__table-cell--meta small--text-left">
                 <p class="h3">
-                  <a href="{{ item.url }}" class="cart__text">{{ item.product.title }}
-<span class="saso-cart-item-discount-notes" data-key="{{item.key}}"></span>
-<span class="saso-cart-item-upsell-notes" data-key="{{item.key}}"></span>                                
-                                </a>
+                  <a href="{{ item.url }}" class="cart__text">{{ item.product.title }}</a>
                 </p>
                 {% unless item.variant.title contains 'Default' %}
                   <p class="txt--minor">{{ item.variant.title }}</p>
@@ -79,9 +76,7 @@
                   <p class="cart-item__original-price"><small><s>{{ item.original_line_price | money }}</s></small></p>
                 {% endif %}
                 <span>
-                  
-<span class="saso-cart-item-line-price" data-key="{{item.key}}">{{ item.line_price | money }}</span>
-
+                  {{ item.line_price | money }}
                 </span>
                 {% for discount in item.discounts %}
                   <p class="cart-item__discount"><small>{{ discount.title }}</small></p>
@@ -102,11 +97,8 @@
           {% endif %}
           <div class="grid__item text-center {% if settings.cart_notes_enable %} medium-up--one-half medium-up--text-right{% endif %}">
             <p>
-              <span class="cart__subtotal-title h4"><span id=""><span id="bk-cart-subtotal-label">{{ 'cart.general.subtotal' | t }}</span></span></span>
-              <span class="cart__subtotal"><span id="">
-<span class="saso-cart-original-total"><span id="bk-cart-subtotal-price">{{ cart.total_price | money }}</span></span>
-<span class="saso-cart-total"></span>
-</span></span>
+              <span class="cart__subtotal-title h4"><span id="bk-cart-subtotal-label">{{ 'cart.general.subtotal' | t }}</span></span>
+              <span class="cart__subtotal"><span id="bk-cart-subtotal-price">{{ cart.total_price | money }}</span></span>
             </p>
             {% if cart.total_discounts > 0 %}
               {% assign savings = cart.total_discounts | money %}

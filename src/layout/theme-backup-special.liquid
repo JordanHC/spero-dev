@@ -81,23 +81,6 @@
 <script src='https://widget.privy.com/assets/widget.js'></script>
 <!-- END PRIVY WIDGET CODE -->
   {{ content_for_header }}
-<!-- Facebook Pixel Code -->
-<script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '154357052078555');
-  fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-  src="https://www.facebook.com/tr?id=154357052078555&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Facebook Pixel Code -->
 
 </head>
 
@@ -183,7 +166,25 @@
 
   </div>
   <!-- Begin MailChimp Signup Form -->
-
+<div class="mailchimp-signup" id="mc_embed_signup">
+<form action="//speroliverpool.us17.list-manage.com/subscribe/post?u=797092e356355b9b4ee85c32a&amp;id=058fe74584" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="mailchimp-signup__form validate" target="_blank" novalidate>
+  <div class="mailchimp-signup__cross">
+    <span class="mailchimp-signup__part mailchimp-signup__left"></span>
+    <span class="mailchimp-signup__part mailchimp-signup__middle"></span>
+    <span class="mailchimp-signup__part mailchimp-signup__right"></span>
+  </div>
+  <div id="mc_embed_signup_scroll">
+    <label class="mailchimp-signup__title" for="mce-EMAIL">{{ settings.newsletter_title }}</label>
+    <p class="mailchimp-signup__text">{{ settings.newsletter_text }}</p>
+    <input class="mailchimp-signup__input mailchimp-signup__base" type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter Your E-mail address*" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true">
+      <input type="text" name="b_797092e356355b9b4ee85c32a_058fe74584" tabindex="-1" value="">
+    </div>
+    <div class="clear"><input type="submit" value="Become a VIP" name="subscribe" id="mc-embedded-subscribe" class="mailchimp-signup__btn mailchimp-signup__base button"></div>
+  </div>
+</form>
+</div>
 
 <!--End mc_embed_signup-->
 
@@ -279,20 +280,5 @@
 
   {% endif %}
 
-
-{% include 'special-offers' %}
-
-<script type="text/javascript">
-  var _learnq = _learnq || [];
-
-  _learnq.push(['account', 'M5RSXT']);
-
-  (function () {
-  var b = document.createElement('script'); b.type = 'text/javascript'; b.async = true;
-  b.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'a.klaviyo.com/media/js/analytics/analytics.js';
-  var a = document.getElementsByTagName('script')[0]; a.parentNode.insertBefore(b, a);
-  })();
-</script>
-  
 <!-- BEEKETINGSCRIPT CODE START -->{% include 'bk-tracking' %}<!-- BEEKETINGSCRIPT CODE END --></body>
 </html>

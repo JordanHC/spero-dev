@@ -45,8 +45,8 @@
               {% endcomment %}
               {% if product.compare_at_price > product.price %}
                 <span class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
-                <s class="product-item__price--reg">{{ product.compare_at_price | money }}</s>
                 <span class="product-item__price--sale">{{ 'products.general.now_price_html' | t: price: price }}</span>
+                <s class="product-item__price--reg">{{ product.compare_at_price | money }}</s>     
               {% else %}
                 {% if product.price_varies %}
                   {{ 'products.general.from_text_html' | t: price: price }}
