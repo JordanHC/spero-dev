@@ -344,7 +344,7 @@ $color-white: #fff;
       padding-top: 138px;
     }
   }
-  &:last-child {
+  &:last-of-type {
     padding-bottom: 56px;
     @include media-query($medium-up) {
       padding-bottom: 72px;
@@ -362,16 +362,6 @@ $color-white: #fff;
   padding-top: 60px;
 }
 
-//   @include media-query($medium-up) {
-//     padding-top: 100px;
-//   }
-//   @include media-query($widescreen) {
-//     padding-top: 120px;
-//   }
-//   @include media-query($epic) {
-//     padding-top: 142px;
-//   }
-// }
 .homeproducts__title {
   margin-bottom: 12px;
   padding-left: 15px;
@@ -390,6 +380,13 @@ $color-white: #fff;
   @include media-query($epic) {
     margin-bottom: 18px;
     font-size: 40px;
+  }
+}
+
+.homeproducts__title--space {
+  margin-bottom: 32px;
+  @include media-query($epic) {
+    margin-bottom: 38px;
   }
 }
 
@@ -634,4 +631,27 @@ $color-white: #fff;
   60% {
     transform: translateY(-15px);
   }
+}
+
+.instafeed {
+  background: $color-white;
+  padding-bottom: 50px;
+  @include media-query($medium-up) {
+    padding-bottom: 60px;
+  }
+  @include media-query($widescreen) {
+    padding-bottom: 80px;
+  }
+  @include media-query($epic) {
+    padding-bottom: 110px;
+  }
+}
+
+.instafeed__inner {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+#insta-feed .container {
+  border: 1px solid $color-white !important;
 }
