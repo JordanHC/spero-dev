@@ -5,7 +5,7 @@
 {% endcomment %}
 
 {% assign slider_enabled = true %}
-<div class="hero-wrapper">
+<section class="hero-wrapper">
   <div class="hero__site-header">
     <div class="grid grid--no-gutter grid--table site-header__inner">
       <div class="grid__item one-third">
@@ -30,13 +30,13 @@
       </div>
     </div>
   </div>
-  
+
   {% section 'slideshow' %}
-  
+
   <div class="hero__header">
    <div class="action-area">
      {% include 'action-bar' %}
    </div>
  </div>
-</div>
+</section>
 {{ content_for_index }}

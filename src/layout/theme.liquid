@@ -26,6 +26,7 @@
   {% include 'social-meta-tags' %}
 
   {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'v2.scss.css' | asset_url | stylesheet_tag }}
 
   <!-- Google Fonts | from theme settings ================================================== -->
   {% if settings.type_base_family contains 'Google' %}
@@ -293,6 +294,6 @@
   var a = document.getElementsByTagName('script')[0]; a.parentNode.insertBefore(b, a);
   })();
 </script>
-  
+
 <!-- BEEKETINGSCRIPT CODE START -->{% include 'bk-tracking' %}<!-- BEEKETINGSCRIPT CODE END --></body>
 </html>
