@@ -172,7 +172,8 @@ $font-size-base: 15px; // Henseforth known as 1em
   font-style: normal;
 }
 
-$font-gothic-bold: 'trumpgothiceastbold';
+$font-gothic-bold: 'trumpgothiceastbold',
+sans-serif;
 $font-montserrat: 'Montserrat';
 $font-stack-icons: 'icons';
 $font-size-icons-social: 20px;
@@ -575,4 +576,62 @@ $color-white: #fff;
 
 .template-index {
   background: $color-white;
+}
+
+.scroll {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding-bottom: 40px;
+  @include media-query($widescreen) {
+    padding-bottom: 37px;
+  }
+}
+
+.scroll__inner {
+  max-width: 50px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 auto;
+  color: $color-white;
+  animation: bounce 3s infinite;
+}
+
+.scroll__text {
+  padding-bottom: 5px;
+  font-family: $font-gothic-bold;
+  text-transform: uppercase;
+  color: $color-white;
+  font-size: 16px;
+  @include media-query($widescreen) {
+    font-size: 18px;
+  }
+}
+
+.scroll__generic {
+  text-shadow: 0 0 7px rgba(0, 0, 0, 1);
+}
+
+.scroll__img {
+  @include media-query($large-down) {
+    max-width: 26px;
+  }
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  60% {
+    transform: translateY(-15px);
+  }
 }

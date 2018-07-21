@@ -1,0 +1,24 @@
+<svg width="39px" height="44px" viewBox="0 0 39 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <filter x="-39.5%" y="-17.0%" width="178.9%" height="134.1%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Spero_Homepage" transform="translate(-781.000000, -952.000000)" fill="#FFFFFF" fill-rule="nonzero">
+            <g id="Group-3">
+                <g id="Group-4" filter="url(#filter-1)" transform="translate(781.000000, 899.000000)">
+                    <g id="left-arrow" transform="translate(19.500000, 75.000000) rotate(-90.000000) translate(-19.500000, -75.000000) translate(7.000000, 65.000000)">
+                        <path d="M23.5947154,8.11795122 L23.6337398,8.12614634 L6.90487805,8.12614634 L12.1638211,3.06643902 C12.4213415,2.81941463 12.5626016,2.48478049 12.5626016,2.13356098 C12.5626016,1.78234146 12.4213415,1.45004878 12.1638211,1.20243902 L11.3455285,0.416487805 C11.0882114,0.169463415 10.7453252,0.0328780488 10.3796748,0.0328780488 C10.0138211,0.0328780488 9.67073171,0.168487805 9.41341463,0.415512195 L0.398577236,9.06897561 C0.140243902,9.31697561 -0.00101626016,9.64731707 -8.47032947e-22,9.99873171 C-0.00101626016,10.3520976 0.140243902,10.6826341 0.398577236,10.9302439 L9.41341463,19.5844878 C9.67073171,19.8313171 10.0136179,19.967122 10.3796748,19.967122 C10.7453252,19.967122 11.0882114,19.831122 11.3455285,19.5844878 L12.1638211,18.7985366 C12.4213415,18.5519024 12.5626016,18.2225366 12.5626016,17.8713171 C12.5626016,17.5202927 12.4213415,17.2082927 12.1638211,16.9614634 L6.84552846,11.8734634 L23.6134146,11.8734634 C24.3668699,11.8734634 25,11.2500488 25,10.527122 L25,9.4155122 C25,8.69258537 24.3481707,8.11795122 23.5947154,8.11795122 Z" id="Shape"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

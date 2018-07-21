@@ -1,0 +1,18 @@
+<div class="scroll__inner">
+  <span class="scroll__text scroll__generic">{{ section.settings.text-box }}</span>
+  <img class="scroll__img scroll__generic" src="{{ 'arrow.svg' | asset_url }}" alt="arrow" />
+</div>
+
+{% schema %}
+{
+  "name": "Scroll Down",
+  "class": "scroll",
+  "settings": [
+    {
+      "id": "text-box",
+      "type": "text",
+      "label": "Heading"
+    }
+  ]
+}
+{% endschema %}
