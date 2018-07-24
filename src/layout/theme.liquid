@@ -116,29 +116,6 @@
 
 <body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" >
 
-<!--   <div id="SearchDrawer" class="search-bar drawer drawer--top">
-    <div class="search-bar__table">
-      <form action="/search" method="get" class="search-bar__table-cell search-bar__form" role="search">
-        <div class="search-bar__table">
-          <div class="search-bar__table-cell search-bar__icon-cell">
-            <button type="submit" class="search-bar__icon-button search-bar__submit">
-              <span class="icon icon-search" aria-hidden="true"></span>
-              <span class="icon__fallback-text">{{ 'general.search.submit' | t }}</span>
-            </button>
-          </div>
-          <div class="search-bar__table-cell">
-            <input type="search" id="SearchInput" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.placeholder' | t }}" class="search-bar__input">
-          </div>
-        </div>
-      </form>
-      <div class="search-bar__table-cell text-right">
-        <button type="button" class="search-bar__icon-button search-bar__close js-drawer-close">
-          <span class="icon icon-x" aria-hidden="true"></span>
-          <span class="icon__fallback-text">{{ 'general.search.close_search' | t }}</span>
-        </button>
-      </div>
-    </div>
-  </div> -->
   <div id="NavDrawer" class="drawer drawer--left">
   {% section 'sidebar-menu' %}
   </div>
@@ -282,7 +259,6 @@
 
 
 {% include 'special-offers' %}
-
 <script type="text/javascript">
   var _learnq = _learnq || [];
 

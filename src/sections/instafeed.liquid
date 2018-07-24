@@ -2,16 +2,42 @@
   <div class="row">
     <h2 class="homeproducts__title homeproducts__title--space">INSTAGRAM FEED</h2>
     <div class="instafeed__inner">
-      <div id="insta-feed"></div>
+      <div id="instafeed"></div>
     </div>
   </div>
 </div>
 
+{% assign instafeed_template = '<a href="{{link}}" target="_blank" class="instafeed__link"><img src="{{image}}" class="instafeed__img" /><div class="instafeed__overlay"><span class="instafeed__text">{{caption}}</span></div></a>' %}
+
+<script src="{{ 'instafeed.js' | asset_url  }}"></script>
+<script type="text/javascript">
+  var feed = new Instafeed({
+      get: 'user',
+      userId: '5612741596',
+      accessToken: '5612741596.1677ed0.316aa29bc7c24bd99c8bc85d122e2f54',
+      resolution: 'low_resolution',
+      limit: 5,
+      template: '{{ instafeed_template }}'
+  });
+  feed.run();
+
+   $(window).bind("load", function() {
+        const instafeedText = document.querySelectorAll('.instafeed__text');
+        console.log(instafeedText.length);
+        for (let i = 0; instafeedText.length > i; i++) {
+          let text = instafeedText[i].textContent;
+          instafeedText[i].textContent = text.substring(0, 150);
+        }
+        $('.instafeed__overlay').prepend('<img class="instafeed__icon" src="{{ 'instagram.svg' | asset_url }}" alt="Instagram Icon" />');
+      });
+
+
+</script>
 
 {% schema %}
 {
   "name": "instafeed",
-  "class": "instafeed__inner",
+  "class": "instafeed__wrapper",
   "settings": [
     {
       "id": "text-box",

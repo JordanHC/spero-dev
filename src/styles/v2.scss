@@ -51,11 +51,13 @@
 ==============================================================================*/
 
 $grid-medium: 750px;
+$grid-tiny: 380px;
 $grid-small: 500px;
 $grid-large: 990px;
 $grid-widescreen: 1200px;
 $grid-epic: 1580px;
 $grid-gutter: 30px;
+$tiny: 'tiny';
 $small: 'small';
 $small-up: 'small-up';
 $medium: 'medium';
@@ -211,6 +213,11 @@ $drawer-transition: all 0.35s cubic-bezier(0.29,
 0.63,
 0.44,
 1);
+$epic-transition: all 0.45s cubic-bezier(0.215,
+0.61,
+0.355,
+1);
+$epicslow-transition: all 0.6s ease-in-out;
 $color-drawers: #ffffff;
 $color-drawers-border: adaptive-color($color-drawers,
 5%);
@@ -293,6 +300,7 @@ $collection-grid-height-mobile: 250px;
 // The `$grid-breakpoints` list is used to build our media queries.
 // You can use these in the media-query mixin.
 $grid-breakpoints: ( $small '(max-width: #{$grid-medium - 1})',
+$tiny '(min-width: #{$grid-tiny})',
 $small-up '(min-width: #{$grid-small})',
 $medium '(min-width: #{$grid-medium}) and (max-width: #{$grid-large - 1})',
 $medium-down '(max-width: #{$grid-large - 1})',
@@ -309,7 +317,7 @@ $color-white: #fff;
   padding-right: 15px;
   max-width: 1200px;
   @include media-query($epic) {
-    max-width: 1400px;
+    max-width: 1430px;
   }
   .homeproduct__link--instock:hover {
     opacity: 1;
@@ -358,10 +366,6 @@ $color-white: #fff;
   }
 }
 
-.homeproducts:first-child {
-  padding-top: 60px;
-}
-
 .homeproducts__title {
   margin-bottom: 12px;
   padding-left: 15px;
@@ -402,7 +406,7 @@ $color-white: #fff;
   margin-top: 20px;
   margin-bottom: 20px;
   list-style: none;
-  @include media-query($small-up) {
+  @include media-query($tiny) {
     flex: 0 50%;
   }
   @include media-query($medium-up) {
@@ -457,8 +461,9 @@ $color-white: #fff;
   color: $color-compare;
   font-size: 16px;
   @include media-query($widescreen) {
-    font-size: 17px;
     margin-left: 14px;
+    font-size: 17px;
+    line-height: 17px;
   }
   @include media-query($epic) {
     font-size: 19px;
@@ -503,6 +508,12 @@ $color-white: #fff;
   font-family: $helveticaNeue;
   font-weight: 300;
   font-size: 13px;
+  @include media-query($tiny) {
+    font-size: 11px;
+  }
+  @include media-query($medium-up) {
+    font-size: 13px;
+  }
   @include media-query($widescreen) {
     padding-top: 14px;
     padding-bottom: 14px;
@@ -521,7 +532,7 @@ $color-white: #fff;
     width: 100%;
     z-index: -1;
     background: $color-whereistheblack;
-    transition: all 0.45s cubic-bezier(0.215, 0.61, 0.355, 1);
+    transition: $epic-transition;
   }
   &:hover {
     background: $color-white;
@@ -537,7 +548,7 @@ $color-white: #fff;
 .homeproduct__btn--nostock {
   background: $color-nostock;
   color: $color-black;
-  border: 0;
+  border-color: $color-nostock;
   cursor: not-allowed;
   &:hover {
     background: $color-nostock;
@@ -555,7 +566,7 @@ $color-white: #fff;
     width: 100%;
     z-index: -1;
     background: $color-whitefaded;
-    transition: all 0.45s cubic-bezier(0.215, 0.61, 0.355, 1);
+    transition: $epic-transition;
   }
   &:hover {
     &:after {
@@ -652,6 +663,92 @@ $color-white: #fff;
   padding-right: 15px;
 }
 
-#insta-feed .container {
-  border: 1px solid $color-white !important;
+#instafeed {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.instafeed__link {
+  display: flex;
+  flex: 0 50%;
+  border: 1px solid $color-white;
+  @include media-query($small-up) {
+    flex: 0 33.33%;
+  }
+  @include media-query($large-up) {
+    flex: 0 25%;
+  }
+  @include media-query($widescreen) {
+    flex: 0 20%;
+    position: relative;
+    background: $color-black;
+  }
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.instafeed__icon {
+  @include media-query($widescreen) {
+    transition: $epicslow-transition;
+    margin-bottom: 20px;
+    opacity: 0;
+    transform: translateY(3px);
+  }
+  .instafeed__link:hover & {
+    @include media-query($widescreen) {
+      transform: translateY(0px);
+      opacity: 1;
+      transition-delay: 0.41s;
+    }
+  }
+}
+
+.instafeed__img {
+  @include media-query($widescreen) {
+    transition: $epic-transition;
+  }
+  .instafeed__link:hover & {
+    @include media-query($widescreen) {
+      opacity: 0.25;
+    }
+  }
+}
+
+.instafeed__text {
+  @include media-query($widescreen) {
+    transition: $epicslow-transition;
+    opacity: 0;
+    color: $color-white;
+    transform: translateY(4px);
+  }
+  .instafeed__link:hover & {
+    @include media-query($widescreen) {
+      transform: translateY(0px);
+      transition-delay: 0.5s;
+      opacity: 1;
+    }
+  }
+}
+
+.instafeed__overlay {
+  @include media-query($large-down) {
+    display: none;
+  }
+  @include media-query($widescreen) {
+    position: absolute;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 34px;
+    font-family: $helveticaNeue, sans-serif;
+    font-size: 11px;
+    text-align: center;
+  }
+  @include media-query($epic) {
+    font-size: 12px;
+  }
 }
