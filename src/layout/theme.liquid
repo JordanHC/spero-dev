@@ -79,7 +79,7 @@
   <!--[if lte IE 9]><script src="{{ 'theme.js' | asset_url }}"></script><![endif]-->
    <!-- BEGIN PRIVY WIDGET CODE -->
 <script type='text/javascript'> var _d_site = _d_site || '03C4F764FC37F2FF4ABD13F8'; </script>
-<script src='https://widget.privy.com/assets/widget.js'></script>
+{% comment %} <script src='https://widget.privy.com/assets/widget.js'></script> {% endcomment %}
 <!-- END PRIVY WIDGET CODE -->
   {{ content_for_header }}
 <!-- Facebook Pixel Code -->
@@ -157,7 +157,7 @@
       {{ content_for_layout }}
     </main>
 
-
+    {% section 'footer-new' %}
 
   </div>
   <!-- Begin MailChimp Signup Form -->

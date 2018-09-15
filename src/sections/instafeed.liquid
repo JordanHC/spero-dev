@@ -1,6 +1,12 @@
 <div class="v2__container">
   <div class="row">
-    <h2 class="homeproducts__title homeproducts__title--space">INSTAGRAM FEED</h2>
+    <h2 class="homeproducts__title homeproducts__title--space">{{ section.settings.text-box }}</h2>
+    <div class="instafeed__spinner">
+      <div class="instafeed__spinnerinner">
+        <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+        <span>Pulling Lastest Posts...</span>
+      </div>
+    </div>
     <div class="instafeed__inner">
       <div id="instafeed"></div>
     </div>
@@ -29,6 +35,9 @@
           instafeedText[i].textContent = text.substring(0, 150);
         }
         $('.instafeed__overlay').prepend('<img class="instafeed__icon" src="{{ 'instagram.svg' | asset_url }}" alt="Instagram Icon" />');
+        $('.instafeed__spinner').fadeOut('slow', function() {
+          $('.instafeed__inner').fadeIn('fast');
+        });
       });
 
 

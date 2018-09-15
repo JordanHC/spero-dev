@@ -1,0 +1,27 @@
+<footer class="footer">
+  <p class="footer__text">{{ section.settings.footer_text }} <a href="{{ section.settings.footer_link_list }}">{{ section.settings.footer_link_text }}</a></p>
+</footer>
+
+{% schema %}
+  {
+    "name": "Footer",
+    "class": "footer-section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "footer_text",
+        "label": "Text"
+      },
+      {
+        "type": "text",
+        "id": "footer_link_text",
+        "label": "Link Text"
+      },
+      {
+        "type": "url",
+        "id": "footer_link_list",
+        "label": "Link"
+      }
+    ]
+  }
+{% endschema %}
