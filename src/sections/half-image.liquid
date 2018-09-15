@@ -1,0 +1,22 @@
+{% if section.settings.half-img %}
+    <img  class="half-img" src="{{ section.settings.half-img | img_url: '1024x1024'  }}" alt="{{ section.settings.half-img-alt }}"/>
+{% endif %}
+
+{% schema %}
+{
+    "name": "Half Image",
+    "class": "half-img__wrap grid__item medium-up--one-half",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "half-img",
+            "label": "Half Image"
+        },
+        {
+            "type": "text",
+            "id": "half-img-alt",
+            "label": "Half Image Alt Text"
+        }
+    ]
+}
+{% endschema %}

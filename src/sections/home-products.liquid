@@ -1,0 +1,69 @@
+<div class="v2__container">
+  <div class="row">
+    <h2 class="homeproducts__title">{{ section.settings.text-box }}</h2>
+
+    <ul class="homeproducts__list">
+      {% for product in collections[section.settings.home_featured_products].products %}
+        {% if product.metafields.product.featured_image %}
+          {% assign product_image = product.metafields.product.featured_image %}
+        {% else %}
+          {% assign product_image = product.featured_image | product_img_url: 'large' %}
+        {% endif %}
+        <li class="homeproduct">
+          <a {% if product.available %}href="{{ product.url }}"{% endif %}
+              class="homeproduct__link{% if product.available %} homeproduct__link--instock{% else %} homeproduct__link--nostock{% endif %}">
+            <img src="{{ product_image }}"
+                  alt="{{ product.title }}"
+                  class="homeproduct__img"
+            />
+          </a>
+          <div class="homeproduct__textwrap">
+            {% if product.available %}<a href="{{ product.url }}">{% endif %}
+              <h5 class="homeproduct__title">{{ product.title }}</h5>
+            {% if product.available %}</a>{% endif %}
+            {% if product.compare_at_price_max > product.price %}
+              <span class="homeproduct__price homeproduct__price--sale">{{ product.price | money }}</span>
+              <span class="homeproduct__price homeproduct__price--compare">{{ product.compare_at_price_max | money }}</span>
+            {% else %}
+              <span class="homeproduct__price">{{ product.price | money }}</span>
+            {% endif %}
+          </div>
+          <a {% if product.available %}href="{{ product.url }}"{% endif %}
+             class="btn add-to-cart homeproduct__btn{% if product.available and product.compare_at_price_max == 0 %} homeproduct__btn--instock{% endif %}{% unless product.available %} homeproduct__btn--nostock{% endunless %}{% if product.compare_at_price_max > product.price %} homeproduct__btn--sale{% endif %}">
+            {% if product.available %}
+              Add to Cart
+            {% else %}
+              Out Of Stock
+            {% endif %}
+          </a>
+
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Home Products",
+  "class": "homeproducts",
+  "settings": [
+    {
+      "id": "text-box",
+      "type": "text",
+      "label": "Heading"
+    },
+    {
+     "type": "collection",
+     "id": "home_featured_products",
+     "label": "Collection"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home Products",
+      "category": "Home"
+    }
+  ]
+}
+{% endschema %}

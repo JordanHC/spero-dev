@@ -1189,7 +1189,7 @@ theme.Collection = (function() {
 
 
 
-{% if settings.cart_type == 'drawer' %}
+
 /*!
 handlebars v1.3.0
 
@@ -1330,7 +1330,7 @@ var ajaxCart = (function(module, $) {
       addToCartSelector  : 'input[type="submit"]',
       cartCountSelector  : null,
       cartCostSelector   : null,
-      moneyFormat        : '${{amount}}',
+      moneyFormat        : '$',
       disableAjaxCart    : false,
       enableQtySelectors : true
     };
@@ -1431,8 +1431,8 @@ var ajaxCart = (function(module, $) {
     // Show empty cart
     if (cart.item_count === 0) {
       $cartContainer
-        .append('<p class="cart--empty-message">' + {{ 'cart.general.empty' | t | json }} + '</p>\n'
-        + '<p class="cart--cookie-message">' + {{ 'cart.general.cookies_required' | t | json }} + '</p>');
+        .append('<p class="cart--empty-message">' + "Your cart is currently empty." + '</p>\n'
+        + '<p class="cart--cookie-message">' + "Enable cookies to use the shopping cart" + '</p>');
       cartCallback(cart);
       return;
     }
@@ -1496,7 +1496,7 @@ var ajaxCart = (function(module, $) {
       items: items,
       note: cart.note,
       totalPrice: Shopify.formatMoney(cart.total_price, settings.moneyFormat),
-      totalCartDiscount: cart.total_discount === 0 ? 0 : {{ 'cart.general.savings_html' | t: price: '[savings]' | json }}.replace('[savings]', Shopify.formatMoney(cart.total_discount, settings.moneyFormat)),
+      totalCartDiscount: cart.total_discount === 0 ? 0 : "You're saving [savings]".replace('[savings]', Shopify.formatMoney(cart.total_discount, settings.moneyFormat)),
       totalCartDiscountApplied: cart.total_discount === 0 ? false : true
     }
 
@@ -1701,7 +1701,7 @@ var ajaxCart = (function(module, $) {
 
 }(ajaxCart || {}, jQuery));
 
-{% endif %}
+
 
 /*================ SECTIONS ================*/
 theme.SlideshowSection = (function() {
@@ -2148,11 +2148,11 @@ theme.stringOverrides = function () {
 };
 
 theme.initCart = function() {
-  {% if settings.cart_type == 'drawer' %}
+  
     ajaxCart.init({
       moneyFormat: theme.settings.moneyFormat
     });
-  {% endif %}
+  
 
   if (!theme.cookiesEnabled()) {
     theme.cache.$cartContainer.addClass(theme.cache.cartNoCookies);
@@ -2179,7 +2179,7 @@ theme.drawersInit = function () {
 
   theme.LeftDrawer = new theme.Drawers('NavDrawer', 'left');
   theme.RightDrawer = new theme.Drawers('CartDrawer', 'right', {
-    {% if settings.cart_type == 'drawer' %}'onDrawerOpen': ajaxCart.load{% endif %}
+    'onDrawerOpen': ajaxCart.load
   });
   theme.SearchDrawer = new theme.Drawers('SearchDrawer', 'top', {'onDrawerOpen': theme.searchFocus});
 };
@@ -2201,9 +2201,9 @@ theme.searchSubmit = function () {
 
 theme.socialSharing = function () {
   // Stop initializing if settings are disabled
-  {% unless settings.social_sharing_products or settings.social_sharing_blog %}
+  
     return;
-  {% endunless %}
+  
 
   // General selectors
   var $buttons = theme.cache.$shareButtons;

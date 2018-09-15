@@ -86,26 +86,26 @@ $color-greyish: #b5b5b5;
 $color-transparent: rgba(0,0,0, 0);
 
 // Backgrounds
-$color-body: {{ settings.color_body_bg }};
-$color-footer: {{ settings.color_footer_bg }};
+$color-body: #ffffff;
+$color-footer: #000000;
 
 // Button colors
-$color-btn-primary: {{ settings.color_button_bg }};
+$color-btn-primary: #000000;
 $color-btn-primary-hover: darken($color-btn-primary, 10%);
 $color-btn-primary-active: darken($color-btn-primary-hover, 10%);
-$color-btn-primary-text: {{ settings.color_button_text }};
+$color-btn-primary-text: #fff;
 
 // Text link colors
-$color-link: {{ settings.color_body_links }};
+$color-link: #bababa;
 $opacity-link-hover: 0.7;
 
 // Text colors
-$color-body-text: {{ settings.color_body_text }};
-$color-headings-text: {{ settings.color_body_headings }};
-$color-footer-text: {{ settings.color_footer_text }};
+$color-body-text: #000000;
+$color-headings-text: #ffffff;
+$color-footer-text: #ffffff;
 
 // Border colors
-$color-border: {{ settings.color_borders }};
+$color-border: #eeeeee;
 
 // Form colors
 $color-form: #f4f4f4;
@@ -122,18 +122,18 @@ $color-success-bg: #ecfef0;
 $width-logo: initial;
 
 /*================ Navigation Header ================*/
-$color-navigation-bg: {{ settings.color_nav_bg }};
-$color-navigation-text: {{ settings.color_nav_text }};
+$color-navigation-bg: #ffffff;
+$color-navigation-text: #1a1a1a;
 
 /*================ #Action Bar ================*/
-$color-action-bar-bg: {{ settings.color_action_bar_bg }};
-$color-action-bar-text: {{ settings.color_action_bar_text }};
-$color-action-bar-active: {{ settings.color_action_bar_text_active }};
+$color-action-bar-bg: #1a1a1a;
+$color-action-bar-text: #ffffff;
+$color-action-bar-active: #ffffff;
 $height-action-bar-active-indicator: 2px;
 $height-action-bar: 50px;
 
 /*================ Sale badges ================*/
-$color-sale-badge: {{ settings.color_sale_badge }};
+$color-sale-badge: #dac08e;
 $color-sale-badge-text: $color-body;
 
 /*================ #Sizing Variables ================*/
@@ -143,52 +143,38 @@ $gutter-site: 20px;
 $gutter-heading: 30px;
 
 /*================ #Typography Variables ================*/
-{% if settings.type_base_family contains 'Google' %}
-  {% assign type_base_parts = settings.type_base_family | split: '_' %}
-  {% assign type_base_name = type_base_parts[1] %}
-  {% capture base_family %}"{{ type_base_name | split: ':' | first | replace: '+', ' ' }}"{% if type_base_parts.last == 'serif' %}, serif {% else %}, "HelveticaNeue", "Helvetica Neue", sans-serif{% endif %}{% endcapture %}
-{% else %}
-  {% assign base_family = settings.type_base_family %}
-{% endif %}
 
-{% if settings.type_header_family contains 'Google' %}
-  {% assign type_header_parts = settings.type_header_family | split: '_' %}
-  {% assign type_header_name = type_header_parts[1] %}
-  {% capture header_family %}"{{ type_header_name | split: ':' | first | replace: '+', ' ' }}"{% if type_header_parts.last == 'serif' %}, serif {% else %}, "HelveticaNeue", "Helvetica Neue", sans-serif{% endif %}{% endcapture %}
-  {% assign header_weight = type_header_parts[2] | split: ',' %}
-{% else %}
-  {% assign header_family = settings.type_header_family %}
-  {% assign header_weight = 400 %}
-{% endif %}
 
-$font-stack-header: {{ header_family }};
-$font-weight-header: {{ header_weight }};
-$font-size-header: {{ settings.type_header_base_size }};
 
-$font-size-button: {{ settings.type_button_base_size }};
+
+$font-stack-header: "Montserrat", "HelveticaNeue", "Helvetica Neue", sans-serif;
+$font-weight-header: 400;
+$font-size-header: 20px;
+
+$font-size-button: 14px;
 $font-size-button-mobile: $font-size-button - 1px;
 
 $font-weight-normal: 400;
 $font-weight-bold: 700;
 
-$font-stack-body: {{ base_family }};
-$font-size-base: {{ settings.type_base_size }}; // Henseforth known as 1em
+$font-stack-body: "Roboto", "HelveticaNeue", "Helvetica Neue", sans-serif;
+$font-size-base: 15px; // Henseforth known as 1em
 
 @font-face {
   font-family: 'icons';
-  src: url('{{ "icons.eot" | asset_url }}');
-  src: url('{{ "icons.eot" | asset_url }}#iefix') format("embedded-opentype"),
-       url('{{ "icons.woff" | asset_url }}') format("woff"),
-       url('{{ "icons.ttf" | asset_url }}') format("truetype"),
-       url('{{ "icons.svg" | asset_url }}#shop-icons') format("svg");
+  src: url('//cdn.shopify.com/s/files/1/2110/4555/t/3/assets/icons.eot?5882661805990705176');
+  src: url('//cdn.shopify.com/s/files/1/2110/4555/t/3/assets/icons.eot?5882661805990705176#iefix') format("embedded-opentype"),
+       url('//cdn.shopify.com/s/files/1/2110/4555/t/3/assets/icons.woff?5882661805990705176') format("woff"),
+       url('//cdn.shopify.com/s/files/1/2110/4555/t/3/assets/icons.ttf?5882661805990705176') format("truetype"),
+       url('//cdn.shopify.com/s/files/1/2110/4555/t/3/assets/icons.svg?5882661805990705176#shop-icons') format("svg");
   font-weight: $font-weight-normal;
   font-style: normal;
 }
 
 @font-face {
     font-family: 'trumpgothiceastbold';
-    src: url(' {{ "trumpgothiceastbold.woff2" | asset_url }} ') format('woff2'),
-    url(' {{ "trumpgothiceastbold.woff" | asset_url }} ') format('woff');
+    src: url(' //cdn.shopify.com/s/files/1/2110/4555/t/3/assets/trumpgothiceastbold.woff2?5882661805990705176 ') format('woff2'),
+    url(' //cdn.shopify.com/s/files/1/2110/4555/t/3/assets/trumpgothiceastbold.woff?5882661805990705176 ') format('woff');
     font-weight: 700;
     font-style: normal;
 }
@@ -211,7 +197,7 @@ $z-index-hero-logo: 5;
 
 /*================ Misc ================*/
 $radius: 2px;
-$svg-action-bar: '{{ "action-bar.svg.liquid" | asset_url }}';
+$svg-action-bar: '//cdn.shopify.com/s/files/1/2110/4555/t/3/assets/action-bar.svg.liquid?5882661805990705176';
 
 /*================ #Site Header ================*/
 $height-site-header: 65px;
@@ -226,18 +212,18 @@ $drawer-cart-width: 250px;
 $drawer-header-height: $height-site-header;
 $drawer-cart-footer-height: 130px; // default, overwritten by JS
 $drawer-transition: all 0.35s cubic-bezier(0.29, 0.63, 0.44, 1);
-$color-drawers: {{ settings.color_drawer_bg }};
+$color-drawers: #ffffff;
 $color-drawers-border: adaptive-color($color-drawers, 5%);
-$color-drawer-inputs: {{ settings.color_body_bg }};
-$color-drawer-input-text: {{ settings.color_body_text }};
-$color-drawers-text: {{ settings.color_drawer_text }};
+$color-drawer-inputs: #ffffff;
+$color-drawer-input-text: #000000;
+$color-drawers-text: #1a1a1a;
 $color-drawers-text-faded: rgba(0,0,0,0.3);
 $color-drawers-text-lessfaded: rgba(0,0,0,0.5);
 
 /*================ Hero ================*/
-// $color-hero-overlay: {{ settings.hero_overlay_color }};
-// $color-hero-overlay-opacity: {{ settings.hero_overlay_amount }};
-// $color-hero-text: {{ settings.hero_text_color }};
+// $color-hero-overlay: ;
+// $color-hero-overlay-opacity: ;
+// $color-hero-text: ;
 
 /*================ #Collection Grid ================*/
 $collection-grid-height-widescreen: 600px;
@@ -945,7 +931,7 @@ pre {
   width: 16px;
   display: inline-block;
   margin-right: 2px;
-  background-image: url('{{ "shopping-bag.svg" | asset_url }}');
+  background-image: url('//cdn.shopify.com/s/files/1/2110/4555/t/3/assets/shopping-bag.svg?5882661805990705176');
   background-repeat: no-repeat;
   background-size: 100%;
   transform: translateY(1px);
@@ -1317,7 +1303,7 @@ select {
   @include prefix(appearance, none, webkit moz spec);
   background-position: right center;
   background: {
-    image: url('{{ "ico-select.svg" | asset_url }}');
+    image: url('//cdn.shopify.com/s/files/1/2110/4555/t/3/assets/ico-select.svg?5882661805990705176');
     repeat: no-repeat;
     position: right 10px center;
     color: transparent;
@@ -1452,13 +1438,13 @@ label[for] {
   font-family: $font-stack-header;
   font-weight: $font-weight-header;
   text-rendering: optimizeLegibility;
-  {% if settings.type_header_transform %}
+  
     text-transform: uppercase;
-  {% endif %}
+  
 
-  {% unless settings.type_header_spacing == blank %}
-    letter-spacing: {{ settings.type_header_spacing }};
-  {% endunless %}
+  
+    letter-spacing: 0.2em;
+  
 }
 
 @mixin placeholder-text($color, $opacity) {
@@ -2907,7 +2893,7 @@ $slick-opacity-not-active: 0.25;
 
 // Only called once so make sure proper file is grabbed
 @function slick-image-url($url) {
-  @return url({{ "ajax-loader.gif" | asset_url }});
+  @return url(//cdn.shopify.com/s/files/1/2110/4555/t/3/assets/ajax-loader.gif?5882661805990705176);
 }
 
 // Unused intentionally
@@ -6029,9 +6015,9 @@ input[type="submit"] {
 /*============================================================================
   #General Variables
 ==============================================================================*/
-$color-body: {{ settings.color_body_bg }};
-$color-border: {{ settings.color_borders }};
-$color-body-text: {{ settings.color_body_text }};
+$color-body: #ffffff;
+$color-border: #eeeeee;
+$color-body-text: #000000;
 $gutter-site: 20px;
 
 $color-giftcard-tooltip-fallback: #333;

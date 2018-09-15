@@ -11,8 +11,8 @@
             {% assign has_active_child_link = true %}
           {% endif %}
         {% endfor %}
-        <li class="drawer-nav__item drawer-nav__item--upper{% unless template.name == 'index' %}{% if link.active %} drawer-nav__item--active{% endif %}{% endunless %}" aria-haspopup="true">
-          <div class="drawer-nav__has-sublist{% if has_active_child_link %} drawer-nav--expanded{% endif %}">
+        <li class="drawer-nav__item drawer-nav__item--upper drawer-nav__item--hc{% unless template.name == 'index' %}{% if link.active %} drawer-nav__item--active{% endif %}{% endunless %}" aria-haspopup="true">
+          <div class="drawer-nav__has-sublist">
             <a href="{{ link.url }}" class="drawer-nav__link drawer-nav__link--upper h2">{{ link.title }}</a>
             <div class="drawer-nav__toggle">
               <button type="button" class="drawer-nav__toggle-button">
@@ -30,14 +30,14 @@
           <ul class="drawer-nav__sublist">
             {% for childlink in linklists[child_list_handle].links %}
               <li class="drawer-nav__item{% unless template.name == 'index' %}{% if childlink.active %} drawer-nav__item--active{% endif %}{% endunless %}">
-                <a href="{{ childlink.url }}" class="drawer-nav__link">{{ childlink.title | escape }}</a>
+                <a {% unless childlink.url == '/collections/nope' %}href="{{ childlink.url }}"{% endunless %} class="drawer-nav__link{% if childlink.url == '/collections/nope' %} drawer-disabled{% endif %}">{{ childlink.title | escape }}</a>
               </li>
             {% endfor %}
           </ul>
         </li>
       {% else %}
         <li class="drawer-nav__item drawer-nav__item--upper{% unless template.name == 'index' %}{% if link.active %} drawer-nav__item--active{% endif %}{% endunless %}">
-          <a href="{{ link.url }}" class="drawer-nav__link h2">{{ link.title }}</a>
+          <a {% unless link.url == '/collections/nope' %}href="{{ link.url }}"{% endunless %} class="drawer-nav__link h2{% if link.url == '/collections/nope' %} drawer-disabled{% endif %}">{{ link.title }}</a>
         </li>
       {% endif %}
     {% endfor %}

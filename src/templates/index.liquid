@@ -5,7 +5,7 @@
 {% endcomment %}
 
 {% assign slider_enabled = true %}
-<div class="hero-wrapper">
+<section class="hero-wrapper">
   <div class="hero__site-header">
     <div class="grid grid--no-gutter grid--table site-header__inner">
       <div class="grid__item one-third">
@@ -25,17 +25,26 @@
         <a href="/cart" class="site-header__link site-header__cart cart-link{% if settings.cart_type == 'drawer' %} js-drawer-open-right{% endif %}{% if cart.item_count > 0 %} cart-bubble--visible{% endif %}">
           <span class="icon icon-cart" aria-hidden="true"></span>
           <span class="icon__fallback-text">{{ 'layout.cart.title' | t }}</span>
+          <span class="cart-qty">(<span>{{ cart.item_count }}</span>)</span>
         </a>
       </div>
     </div>
   </div>
-  
+
   {% section 'slideshow' %}
-  
+
+  {% section 'scroll-text' %}
+
   <div class="hero__header">
    <div class="action-area">
      {% include 'action-bar' %}
    </div>
  </div>
-</div>
-{{ content_for_index }}
+</section>
+<section>
+  {{ content_for_index }}
+</section>
+<section class="instafeed">
+  {% section 'instafeed' %}
+</section>
+{% section 'newsletter-signup' %}
